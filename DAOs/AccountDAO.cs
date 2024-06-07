@@ -27,7 +27,7 @@ namespace DAOs
             return true;
         }
 
-        public bool DelAccounts(int id)
+        public bool DelAccounts(string id)
         {
             Account account = dbContext.Accounts.Find(id);
             dbContext.Accounts.Remove(account);
@@ -37,7 +37,7 @@ namespace DAOs
 
         public List<Account> GetAccounts()
         {
-            return dbContext.Accounts.OrderByDescending(x => x.AccountId).ToList();
+            return dbContext.Accounts.OrderByDescending(x => x.Email).ToList();
         }
 
         public bool UpdateAccounts(Account account)

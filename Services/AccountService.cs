@@ -1,5 +1,7 @@
 ﻿using BusinessObjects;
+using BusinessObjects.Models;
 using DAOs;
+using Microsoft.AspNetCore.Identity;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,16 +11,14 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
         private readonly IAccountRepository iAccountRepository = null;
 
-        public AccountService()
+
+        public AccountService(IAccountRepository _iAccountRepository)
         {
-            if (iAccountRepository == null)
-            {
-                iAccountRepository = new AccountRepository();
-            }
+            iAccountRepository = _iAccountRepository;
         }
 
         public bool AddAccount(Account account)
@@ -26,14 +26,34 @@ namespace Services
             return iAccountRepository.AddAccount(account);
         }
 
-        public bool DelAccounts(int id)
+        public bool DelAccounts(string id)
         {
             return iAccountRepository.DelAccounts(id);
+        }
+
+        public async Task<Account> GetAccountById(string id)
+        {
+            return await iAccountRepository.GetAccountById(id);
         }
 
         public List<Account> GetAccounts()
         {
             return iAccountRepository.GetAccounts();
+        }
+
+        public Task<IList<string>> GetRolesAsync(Account user)
+        {
+            return iAccountRepository.GetRolesAsync(user);
+        }
+
+        public Task<Account> SignInAsync(UserSignIn model)
+        {
+            return iAccountRepository.SignInAsync(model);
+        }
+
+        public async Task<IdentityResult> SignUpAsync(AccountDTO model)
+        {
+            return await  iAccountRepository.SignUpAsync(model);  
         }
 
         public bool UpdateAccounts(Account account)
