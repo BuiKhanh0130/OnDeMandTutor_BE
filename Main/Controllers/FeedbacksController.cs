@@ -101,5 +101,15 @@ namespace API.Controllers
             iFeedbackService.AddFeedback(feedback);
             return Ok(feedback);
         }
+
+        [HttpPost("updateIsActiveFeedback/{id}")]
+        public IActionResult updateStatus(string id)
+        {
+            DAOs.DbContext dbContext = new DAOs.DbContext();
+            Feedback? feedback = dbContext.Feedbacks.FirstOrDefault(n => n.FeedbackId == id);
+            feedback.IsActive = false;
+            dbContext.SaveChanges();
+            return Ok();
+        }
     }
 }

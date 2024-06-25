@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects.Models
 {
-    internal class FeedbackDTO
+    public class FeedbackDTO
     {
+        public string StudentId { get; set; }
+
+        public string Description { get; set; }
+
+        public int Start { get; set; }
+        public string? Title { get; set; }
+        public string? TutorID { get; set; }
+
+        public string? ClassID { get; set; }
     }
 }
