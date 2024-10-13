@@ -15,9 +15,9 @@ namespace API.Controllers
     {
         private readonly INotificationService _notificationService;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IHubContext<ChatHub> _hubContext;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public NotificationController(ICurrentUserService currentUserService, IHubContext<ChatHub> hubContext)
+        public NotificationController(ICurrentUserService currentUserService, IHubContext<NotificationHub> hubContext)
         {
             _notificationService = new NotificationService();
             _currentUserService = currentUserService;
